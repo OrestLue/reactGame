@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import Card from './CardTest'
 import CardTest from './CardTest'
 
@@ -9,6 +9,8 @@ export default class CardStuff extends React.Component{
         const imgContent = [
             'A',
             'B',
+            'C',
+            'D'
         ];
 
         const deck = imgContent
@@ -54,7 +56,7 @@ export default class CardStuff extends React.Component{
                     this.flipCardTo(this.state.firstCard, false);
                     this.flipCardTo(cardIdx, false);
                     this.setState({firstCard: null})
-                }, 2000)
+                }, 1000)
             }
         }
 
@@ -62,28 +64,34 @@ export default class CardStuff extends React.Component{
     }
     render() {
         return (
-            this.state.deck.map((f, i) => {
+                <View style={styles.container}>
+                {this.state.deck.map((f, i) => {
                 return (
-                    <View style={styles.container}>
                         <Card
+                            style={{width: 100, height: 100, backgroundColor: '#FEB12C', margin: 10}}
                             flip={() => {this.flip(i)}}
                             content={f.content}
                             faceUp={f.faceUp}/>
-                    </View>
                 )
-            })
+            })}</View>
+
         )
     }
 }
 const styles = StyleSheet.create({
+    backCol: {
+        backgroundColor: 'red',
+    },
+    infoBlock: {
+        marginTop: 90,
+    },
     container: {
         flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',
-        width: '100%',
-        height: '85%',
-        backgroundColor: 'grey',
-        marginTop: 50,
-        justifyContent: 'center'
+        backgroundColor: '#FF433E',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: '25%'
     },
 });

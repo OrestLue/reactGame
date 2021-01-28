@@ -14,9 +14,8 @@ export default class CardTest extends React.Component {
         } else {
             content = ''
         }
-
         return(
-            <TouchableOpacity onPress={this.props.flip} style={this.props.faceUp ? styles.backFace : styles.cardBlock}>
+            <TouchableOpacity onPress={this.props.flip} style={[{...this.props.style}, this.props.faceUp ? styles.backFace : styles.cardBlock]}>
                 <Text>{content}</Text>
             </TouchableOpacity>
         );
@@ -25,30 +24,26 @@ export default class CardTest extends React.Component {
 
 const styles = StyleSheet.create({
     cardBlock: {
-        width: '25%',
-        height: 100,
         backgroundColor: '#FEB12C',
         margin: 5,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
-
     },
     card: {
         width: '100%',
         borderRadius: 5,
     },
     face: {
-        backgroundColor: '#FEB12C',
+        backgroundColor: '#262626',
         height: '100%',
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
+
     },
     backFace:{
         backgroundColor: '#FD474C',
-        width: '25%',
-        height: 100,
         margin: 5,
         justifyContent: 'center',
         alignItems: 'center',
