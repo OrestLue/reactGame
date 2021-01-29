@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import FlipCard from "react-native-flip-card";
 import {Image, StyleSheet, View, Text, TouchableOpacity} from "react-native";
+import {LinearGradient} from "expo-linear-gradient";
 
 export default class CardTest extends React.Component {
     constructor(props) {
@@ -14,28 +15,43 @@ export default class CardTest extends React.Component {
         } else {
             content = ''
         }
+
+        let backImage = require('../img/CardImg.png');
+
+        console.log(this.props.faceUp)
+
+        if(this.props.faceUp === true) {
+
+            console.log('AAAAAAAAAAAAAAAA')
+        }
+
         return(
-            <TouchableOpacity onPress={this.props.flip} style={[{...this.props.style}, this.props.faceUp ? styles.backFace : styles.cardBlock]}>
-                <Text>{content}</Text>
-            </TouchableOpacity>
+                <TouchableOpacity onPress={this.props.flip} style={[{...this.props.style}, this.props.faceUp ? styles.backFace : styles.cardBlock]}>
+                    <Image style={this.props.faceUp ? styles.imageSize : styles.frontImageSize} source={this.props.faceUp ? content : backImage} />
+                </TouchableOpacity>
         );
     }
 }
 
 const styles = StyleSheet.create({
     cardBlock: {
-        backgroundColor: '#FEB12C',
         margin: 5,
+        backgroundColor: '#030303',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
+        shadowColor: '#FB131B',
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 0.5,
+        shadowRadius: 20,
+        elevation: 10,
     },
     card: {
         width: '100%',
         borderRadius: 5,
     },
     face: {
-        backgroundColor: '#262626',
+        backgroundColor: '#030303',
         height: '100%',
         borderRadius: 10,
         justifyContent: 'center',
@@ -43,7 +59,7 @@ const styles = StyleSheet.create({
 
     },
     backFace:{
-        backgroundColor: '#FD474C',
+        backgroundColor: '#FB131B',
         margin: 5,
         justifyContent: 'center',
         alignItems: 'center',
@@ -53,4 +69,9 @@ const styles = StyleSheet.create({
         width: '60%',
         height: '60%'
     },
+    frontImageSize: {
+        width: '100%',
+        height: '100%',
+        borderRadius: 10,
+    }
 });
