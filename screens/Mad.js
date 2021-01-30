@@ -2,10 +2,6 @@ import React from 'react'
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native'
 import FlipCard from 'react-native-flip-card'
 
-const a = 'A';
-const g = 'G';
-const z = 'Z';
-
 export default function Mad() {
     return (
         <View style={styles.container}>
