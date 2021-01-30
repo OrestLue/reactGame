@@ -99,7 +99,7 @@ export default class GameEasy extends React.Component {
             "Winner",
             `Your score is: ${score}`,
             [
-                {text: "OK", onPress: () => this.props.navigation.navigate('Home')}
+                {text: "OK", onPress: () => this.props.navigation.navigate('Level')}
             ],
             {cancelable: false}
         );

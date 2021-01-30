@@ -12,6 +12,7 @@ import {Button} from "react-native";
 import GameEasy from "./screens/GameEasy";
 import GameMidle from "./screens/GameMidle"
 import GameHard from "./screens/GameHard"
+import Home from "./screens/Home";
 
 const Stack = createStackNavigator();
 
@@ -65,7 +66,14 @@ export default function App() {
                 <Stack.Navigator>
                     {user ? (
                         <>
+
                             <Stack.Screen name="Home" options={{
+                                headerTransparent: true,
+                            }}>
+                                {props => <Home {...props}/>}
+                            </Stack.Screen>
+
+                            <Stack.Screen name="Level" options={{
                                 headerRight: () => (
                                     <Button
                                         onPress={() => logOut()}
