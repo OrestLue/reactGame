@@ -74,7 +74,8 @@ export default class CardStuff extends React.Component{
             <View>
                 <LinearGradient
                     start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
-                    colors={['#12c2e9' , '#c471ed' , '#f64f59']}
+                    colors={[ '#f9c5c5', '#fbceb9', '#f2dab5', '#e2e7bb', '#cdf3ce', '#bff6e0', '#b9f6f1', '#bdf5ff',
+                        '#caedfd', '#d6e6f5', '#dde0e9', '#dcdcdc']}
                     style={styles.linGrad}>
                 <View style={styles.container}>
                 {this.state.deck.map((f, i) => {
