@@ -15,16 +15,7 @@ export default class CardTest extends React.Component {
         } else {
             content = ''
         }
-
         let backImage = require('../img/CardImg.png');
-
-        console.log(this.props.faceUp)
-
-        if(this.props.faceUp === true) {
-
-            console.log('AAAAAAAAAAAAAAAA')
-        }
-
         return(
                 <TouchableOpacity onPress={this.props.flip} style={[{...this.props.style}, this.props.faceUp ? styles.backFace : styles.cardBlock]}>
                     <Image style={this.props.faceUp ? styles.imageSize : styles.frontImageSize} source={this.props.faceUp ? content : backImage} />

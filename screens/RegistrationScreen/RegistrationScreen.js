@@ -55,11 +55,9 @@ export default function RegistrationScreen({navigation, setLoading}) {
                 firebase.database().ref('users/' + response.user.uid).set({
                     username: fullName,
                     email: email,
-                    phone: phone
-                }).then(() => {
-                        navigation.navigate('Home', {user: {email, fullName, phone}})
-                    }
-                ).catch(error => {
+                    phone: phone,
+                    score: 0
+                }).catch(error => {
                     alert(error)
                 })
             })

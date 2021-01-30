@@ -1,10 +1,10 @@
 import React from 'react'
-import { StyleSheet, View, Text, Alert, Button, Modal } from 'react-native'
+import {Alert, StyleSheet, Text, View} from 'react-native'
 import Card from './CardTest'
-import CardTest from './CardTest'
-import { LinearGradient } from 'expo-linear-gradient';
+import {LinearGradient} from 'expo-linear-gradient';
+import {firebase} from "../firebase/config";
 
-export default class CardStuff extends React.Component{
+export default class GameEasy extends React.Component {
     constructor(props) {
         super(props);
 
@@ -19,8 +19,9 @@ export default class CardStuff extends React.Component{
         const deck = imgContent
             .concat(imgContent)
             .sort(() => Math.random() - 0.5)
-            .map(f => {
+            .map((f, i) => {
                 return {
+                    id: i,
                     content: f,
                     faceUp: false,
                 }
@@ -29,15 +30,18 @@ export default class CardStuff extends React.Component{
 
         this.state = {
             deck: deck,
-            firstCard: null
+            firstCard: null,
+            click: 0,
+            guessed: 0
         }
     }
 
     flipCardTo(cardIdx, faceUp) {
         this.setState({
             deck: this.state.deck.map((f, i) => {
-                if(i === cardIdx) {
+                if (i === cardIdx) {
                     return {
+                        id: f.id,
                         content: f.content,
                         faceUp: !f.faceUp,
                     }
@@ -50,13 +54,19 @@ export default class CardStuff extends React.Component{
 
 
     flip(cardIdx) {
-        if(this.state.firstCard === null) {
+        if (this.state.deck[cardIdx].faceUp === true) return;
+        this.setState({click: this.state.click + 1})
+        if (this.state.firstCard === null) {
             this.setState({firstCard: cardIdx});
         } else {
-            const firstCardContent = this.state.deck[this.state.firstCard].content;
-            const secondCardContent = this.state.deck[cardIdx].content;
-            if(firstCardContent === secondCardContent) {
-                this.setState({firstCard: null});
+            const firstCard = this.state.deck[this.state.firstCard];
+            const secondCard = this.state.deck[cardIdx];
+            if (firstCard.content === secondCard.content && firstCard.id !== secondCard.id) {
+                this.setState({
+                    firstCard: null,
+                    guessed: this.state.guessed + 1
+                });
+
             } else {
                 setTimeout(() => {
                     this.flipCardTo(this.state.firstCard, false);
@@ -69,32 +79,73 @@ export default class CardStuff extends React.Component{
         this.flipCardTo(cardIdx, !this.state.deck[cardIdx].faceUp)
     }
 
+    updateUserScore = (newScore) => {
+        const userRef = firebase.auth().currentUser.uid;
+        firebase.database().ref('/users/' + userRef).once('value').then(
+            snapshot => {
+                return snapshot.val().score;
+            }
+        ).then(r => {
+            firebase.database().ref('/users/' + userRef).update({
+                score: r + newScore
+            })
+        })
+    }
+
+    showAlert = () => {
+        let score = Math.round(10 / this.state.click * 100);
+        this.updateUserScore(score);
+        Alert.alert(
+            "Winner",
+            `Your score is: ${score}`,
+            [
+                {text: "OK", onPress: () => this.props.navigation.navigate('Home')}
+            ],
+            {cancelable: false}
+        );
+    }
+
+    getTopTenFromDb = () => {
+        firebase.database().ref("users").orderByChild("score").once('value')
+            .then(res => {
+                console.log(res);
+            });
+    }
+
     render() {
+        if (this.state.guessed === this.state.deck.length / 2) {
+            this.showAlert();
+        }
+        this.getTopTenFromDb();
         return (
             <View>
                 <LinearGradient
                     start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
-                    colors={['#12c2e9' , '#c471ed' , '#f64f59']}
+                    colors={['#12c2e9', '#c471ed', '#f64f59']}
                     style={styles.linGrad}>
-                <View style={styles.container}>
-                {this.state.deck.map((f, i) => {
-                return (
-                        <Card
-                            style={{width: 100, height: 100, margin: 10}}
-                            flip={() => {this.flip(i)}}
-                            content={f.content}
-                            faceUp={f.faceUp}/>
-                )
-            })}
-                    <LinearGradient
-                        // Button Linear Gradient
-                        start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
-                        colors={['#FFFFFF', '#FFFFFF']}
-                        style={styles.trainingBlock}>
-                        <Text style={{fontSize: 10, fontWeight: 'bold',  textAlign: 'center', color: '#000000'}}>This Is Just A Training Game, Don't Panic</Text>
-                    </LinearGradient>
-                </View>
-            </LinearGradient>
+                    <View style={styles.container}>
+                        {this.state.deck.map((f, i) => {
+                            return (
+                                <Card
+                                    key={i}
+                                    style={{width: 100, height: 100, margin: 10}}
+                                    flip={() => {
+                                        this.flip(i)
+                                    }}
+                                    content={f.content}
+                                    faceUp={f.faceUp}/>
+                            )
+                        })}
+                        <LinearGradient
+                            // Button Linear Gradient
+                            start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+                            colors={['#FFFFFF', '#FFFFFF']}
+                            style={styles.trainingBlock}>
+                            <Text style={{fontSize: 10, fontWeight: 'bold', textAlign: 'center', color: '#000000'}}>This
+                                Is Just A Training Game, Don't Panic</Text>
+                        </LinearGradient>
+                    </View>
+                </LinearGradient>
             </View>
 
         )
@@ -121,7 +172,7 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         marginRight: 5,
         shadowColor: '#FB131B',
-        shadowOffset: { width: 0, height: 0 },
+        shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.5,
         shadowRadius: 20,
         elevation: 10,

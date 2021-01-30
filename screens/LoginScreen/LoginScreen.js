@@ -30,20 +30,35 @@ export default function LoginScreen({navigation, setLoading}) {
             .then((response) => {
                 const uid = response.user.uid
                 firebase.database().ref('/users/' + uid).once('value')
-                    .then(
-                        snapshot => {
-                            const user = snapshot.val();
-                            navigation.navigate('Home', {user: user});
-                        }
-                    ).catch(error => {
-                    alert(error)
-                    setLoading(false);
-                })
+                    .catch(error => {
+                        alert(error)
+                        setLoading(false);
+                    })
             })
             .catch(error => {
                 alert(error)
                 setLoading(false);
             })
+    }
+
+    const onGuestLoginPress = () => {
+        setLoading(true);
+        firebase
+            .auth()
+            .signInAnonymously()
+            .then((response) => {
+                firebase.database().ref('users/' + response.user.uid).set({
+                    username: `Guest ${response.user.uid.substring(0, 7)}`,
+                    email: null,
+                    phone: null,
+                    score: 0
+                }).catch(error => {
+                    alert(error)
+                })
+            })
+            .catch((error) => {
+                alert(error)
+            });
     }
 
     const onChangeEmail = (email) => {
@@ -128,6 +143,11 @@ export default function LoginScreen({navigation, setLoading}) {
                     style={styles.button}
                     onPress={() => onLoginPress()}>
                     <Text style={styles.buttonTitle}>Log in</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => onGuestLoginPress()}>
+                    <Text style={styles.buttonTitle}>Continue as Guest</Text>
                 </TouchableOpacity>
                 <View style={styles.footerView}>
                     <Text style={styles.footerText}>Don't have an account? <Text onPress={onFooterLinkPress}

@@ -5,9 +5,13 @@ import {createStackNavigator} from '@react-navigation/stack'
 import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import {firebase} from './firebase/config'
 import Loading from "./screens/LoadingScreen/loading";
-import Navigator from './routes/homeStack'
 import LoginScreen from "./screens/LoginScreen/LoginScreen";
 import RegistrationScreen from "./screens/RegistrationScreen/RegistrationScreen";
+import Level from "./screens/Level";
+import {Button} from "react-native";
+import GameEasy from "./screens/GameEasy";
+import GameMidle from "./screens/GameMidle"
+import GameHard from "./screens/GameHard"
 
 const Stack = createStackNavigator();
 
@@ -19,7 +23,6 @@ export default function App() {
     useEffect(() => {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                console.log(user);
                 firebase.database().ref('/users/' + user.uid).once('value').then(
                     snapshot => {
                         const userData = snapshot.val();
@@ -58,11 +61,35 @@ export default function App() {
 
     return (
         <PaperProvider theme={theme}>
-            {user ? (
-                <Navigator/>
-            ) : (
-                <NavigationContainer>
-                    <Stack.Navigator>
+            <NavigationContainer>
+                <Stack.Navigator>
+                    {user ? (
+                        <>
+                            <Stack.Screen name="Home" options={{
+                                headerRight: () => (
+                                    <Button
+                                        onPress={() => logOut()}
+                                        title="Log out"
+                                    />
+                                ),
+                                headerTransparent: true,
+                            }}>
+                                {props => <Level {...props}/>}
+                            </Stack.Screen>
+
+                            <Stack.Screen name="GameEasy" component={GameEasy} options={{
+                                headerTransparent: true,
+                            }} />
+
+                            <Stack.Screen name="GameMidle" component={GameMidle} options={{
+                                headerTransparent: true,
+                            }} />
+
+                            <Stack.Screen name="GameHard" component={GameHard} options={{
+                                headerTransparent: true,
+                            }} />
+                        </>
+                    ) : (
                         <>
                             <Stack.Screen name='Login'>
                                 {props => <LoginScreen {...props} setLoading={setLoading}/>}
@@ -71,10 +98,10 @@ export default function App() {
                                 {props => <RegistrationScreen {...props} setLoading={setLoading}/>}
                             </Stack.Screen>
                         </>
-                    </Stack.Navigator>
-                </NavigationContainer>
-            )}
 
+                    )}
+                </Stack.Navigator>
+            </NavigationContainer>
         </PaperProvider>
     );
 }

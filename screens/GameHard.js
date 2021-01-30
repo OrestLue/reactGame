@@ -80,6 +80,7 @@ export default class CardStuff extends React.Component{
                 {this.state.deck.map((f, i) => {
                     return (
                         <Card
+                            key={i}
                             style={{width: '15%', height: 60, backgroundColor: '#FEB12C', margin: 10}}
                             flip={() => {this.flip(i)}}
                             content={f.content}
