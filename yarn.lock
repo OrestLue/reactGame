@@ -1070,9 +1070,9 @@
   integrity sha512-t9pHCQMXOP4nwd7LGXuHkLlFy0JdfknRSCAeVF4Kw2/y+5OBbR9hW9ZVnetpBf0kORrekgiI7K/qDaa3hh5+Qg==
 
 "@expo/config@^3.3.18":
-  version "3.3.26"
-  resolved "https://registry.yarnpkg.com/@expo/config/-/config-3.3.26.tgz#5d15091b9cb22a897fabbb3db2757e75819d9e2e"
-  integrity sha512-krtvZ7P7BMbSbqPP5OFERrzxDGGA2qcFGmL/QpPX11P9wSSRXVqRar1OMwjuKaeQ36wdS21AiMmmvLNeFcbjww==
+  version "3.3.27"
+  resolved "https://registry.yarnpkg.com/@expo/config/-/config-3.3.27.tgz#29ec817a35afb39328d9579b1b644daa8ad3f16c"
+  integrity sha512-wqvUErfU7c7BZX6B4e/SwTxXrYAQ4SFt1MhabDt7Op9V5jM6rHfA819si/5cXbxHQp/3nBfEkj7vzUuGJBWYfQ==
   dependencies:
     "@babel/core" "7.9.0"
     "@expo/babel-preset-cli" "0.2.18"
