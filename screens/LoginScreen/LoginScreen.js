@@ -7,6 +7,7 @@ import styles from './styles';
 import {validate} from "validate.js";
 import emailConstraints from "../../validate/emailConstraints";
 import passwordConstraints from "../../validate/passwordConstraints";
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function LoginScreen({navigation, setLoading}) {
 
@@ -93,10 +94,20 @@ export default function LoginScreen({navigation, setLoading}) {
 
     return (
         <View style={styles.container}>
+            <LinearGradient
+                // Background Linear Gradient
+                start={{x: 0, y: 0.75}} end={{ x: 1, y: 0.25}}
+                colors={['#ffdaef', '#f8daf4', '#efdbf9', '#e6dcfd', '#dbddff', '#d3e1ff', '#cbe5ff', '#c6e8ff', '#c4eeff',
+                    '#c3f4ff', '#c5faff', '#c9fffc']}
+                style={styles.backgroundGradient}
+            >
             <KeyboardAwareScrollView
                 style={{flex: 1, width: '100%'}}
                 keyboardShouldPersistTaps="always">
-
+                <View style={styles.topText}>
+                    <Text style={styles.textFlip}>Flip</Text>
+                    <Text style={styles.textCard}>Card</Text>
+                </View>
                 <TextInput
                     style={styles.input}
                     error={!emailIsValid}
@@ -138,23 +149,25 @@ export default function LoginScreen({navigation, setLoading}) {
                         {passwordError}
                     </HelperText>
                 }
-
+                <View style={styles.buttonCont}>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => onLoginPress()}>
                     <Text style={styles.buttonTitle}>Log in</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={styles.button}
+                    style={styles.button2}
                     onPress={() => onGuestLoginPress()}>
-                    <Text style={styles.buttonTitle}>Continue as Guest</Text>
+                    <Text style={styles.buttonTitle}>Guest</Text>
                 </TouchableOpacity>
+                </View>
                 <View style={styles.footerView}>
                     <Text style={styles.footerText}>Don't have an account? <Text onPress={onFooterLinkPress}
                                                                                  style={styles.footerLink}>Sign
                         up</Text></Text>
                 </View>
             </KeyboardAwareScrollView>
+            </LinearGradient>
         </View>
     )
 }

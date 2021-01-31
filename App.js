@@ -13,6 +13,7 @@ import GameEasy from "./screens/GameEasy";
 import GameMidle from "./screens/GameMidle"
 import GameHard from "./screens/GameHard"
 import Home from "./screens/Home";
+import Mad from "./screens/Mad";
 
 const Stack = createStackNavigator();
 
@@ -94,6 +95,9 @@ export default function App() {
                             }} />
 
                             <Stack.Screen name="GameHard" component={GameHard} options={{
+                                headerTransparent: true,
+                            }} />
+                            <Stack.Screen name="Mad" component={Mad} options={{
                                 headerTransparent: true,
                             }} />
                         </>

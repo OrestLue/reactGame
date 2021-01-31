@@ -12,10 +12,9 @@ export default function Home({ navigation }) {
         <View style={styles.container}>
             <LinearGradient
                 // Background Linear Gradient
-
-
-                colors={[ '#f9c5c5', '#fbceb9', '#f2dab5', '#e2e7bb', '#cdf3ce', '#bff6e0', '#b9f6f1', '#bdf5ff',
-                    '#caedfd', '#d6e6f5', '#dde0e9', '#dcdcdc']}
+                start={{x: 0, y: 0.75}} end={{ x: 1, y: 0.25}}
+                colors={['#ffdaef', '#f8daf4', '#efdbf9', '#e6dcfd', '#dbddff', '#d3e1ff', '#cbe5ff', '#c6e8ff', '#c4eeff',
+                    '#c3f4ff', '#c5faff', '#c9fffc']}
                 style={styles.background}
             >
             <Image style={{width: 250, height: 250}} source={require('../img/logoCard.png')} />
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     goButton: {
-        backgroundColor: '#030303',
+        backgroundColor: 'rgba(1,1,1,0.7)',
         width: 90,
         height: 90,
         borderRadius: 10,
