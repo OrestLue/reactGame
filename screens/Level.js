@@ -15,8 +15,8 @@ export default function Level({ navigation }) {
         navigation.navigate('GameHard')
     };
 
-    const pressHandlerMadLvl = () => {
-        navigation.navigate('Mad')
+    const pressHandlerAchievements = () => {
+        navigation.navigate('Achievements')
     };
 
     return (
@@ -66,14 +66,9 @@ export default function Level({ navigation }) {
                             <Text style={styles.chooseGameTextInButt}>Middle</Text>
                         </TouchableOpacity>
                     </LinearGradient>
-                    {/*
-                    <TouchableOpacity style={styles.buttonsList} onPress={pressHandlerMadLvl}>
-                        <Text style={styles.chooseGameTextInButt}>Mad</Text>
-                    </TouchableOpacity>
-                    */}
                 </View>
                 <View>
-                    <TouchableOpacity onPress={pressHandlerMadLvl}>
+                    <TouchableOpacity onPress={pressHandlerAchievements}>
                         <View style={styles.cupContainer}>
                         <Image style={{width: 30, height: 30}} source={require('../img/cup.png')}/>
                         </View>

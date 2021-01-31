@@ -1,22 +1,56 @@
-import React from 'react'
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native'
+import React, {useEffect, useState} from 'react'
+import {StyleSheet, Text, View} from 'react-native'
 import {LinearGradient} from "expo-linear-gradient";
+import {firebase} from "../firebase/config";
 
-export default function Mad() {
+export default function Achievements() {
+
+    const [users, setUsers] = useState([])
+
+    useEffect(() => {
+        getUsers();
+    }, [])
+
+    const getUsers = () => {
+        let usrRef = firebase.database().ref("users");
+        usrRef.once('value').then(snapshot => {
+            const users = snapshotToArray(snapshot);
+            users.sort((b, a) => (a.score > b.score) ? 1 : ((b.score > a.score) ? -1 : 0))
+            setUsers(users.splice(0, 8));
+        })
+    }
+
+    const snapshotToArray = (snapshot) => {
+        let returnArr = [];
+
+        snapshot.forEach(function (childSnapshot) {
+            let item = childSnapshot.val();
+            item.key = childSnapshot.key;
+
+            returnArr.push(item);
+        });
+
+        return returnArr;
+    };
+
     return (
         <LinearGradient
             // Background Linear Gradient
-            start={{x: 0, y: 0.75}} end={{ x: 1, y: 0.25}}
+            start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
             colors={['#ffdaef', '#f8daf4', '#efdbf9', '#e6dcfd', '#dbddff', '#d3e1ff', '#cbe5ff', '#c6e8ff', '#c4eeff',
                 '#c3f4ff', '#c5faff', '#c9fffc']}
             style={styles.background}
-            >
+        >
             <View style={styles.container}>
                 <View style={styles.tabList}>
                     <Text style={styles.topUsersText}>Top Users</Text>
-                    <View style={styles.userContainer}>
-                        <Text style={styles.userText}>1. Oliver Sykes: 420</Text>
-                    </View>
+                    {users.map((user, index) => {
+                        return (
+                            <View key={index} style={styles.userContainer}>
+                                <Text style={styles.userText}>{`${index + 1}. ${user.username}: ${user.score}`}</Text>
+                            </View>
+                        )
+                    })}
                 </View>
             </View>
         </LinearGradient>
