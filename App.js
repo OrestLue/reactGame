@@ -13,7 +13,6 @@ import GameEasy from "./screens/GameEasy";
 import GameMidle from "./screens/GameMidle"
 import GameHard from "./screens/GameHard"
 import Home from "./screens/Home";
-import Mad from "./screens/Mad";
 import Achievements from "./screens/Achievements";
 
 const Stack = createStackNavigator();
@@ -98,20 +97,20 @@ export default function App() {
                             <Stack.Screen name="GameHard" component={GameHard} options={{
                                 headerTransparent: true,
                             }} />
-
                             <Stack.Screen name="Achievements" component={Achievements} options={{
-                                headerTransparent: true,
-                            }} />
-                            <Stack.Screen name="Mad" component={Mad} options={{
                                 headerTransparent: true,
                             }} />
                         </>
                     ) : (
                         <>
-                            <Stack.Screen name='Login'>
+                            <Stack.Screen name='Login' options={{
+                                headerTransparent: true,
+                            }}>
                                 {props => <LoginScreen {...props} setLoading={setLoading}/>}
                             </Stack.Screen>
-                            <Stack.Screen name="Registration">
+                            <Stack.Screen name="Registration" options={{
+                                headerTransparent: true,
+                            }}>
                                 {props => <RegistrationScreen {...props} setLoading={setLoading}/>}
                             </Stack.Screen>
                         </>
