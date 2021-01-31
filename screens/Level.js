@@ -15,8 +15,8 @@ export default function Level({ navigation }) {
         navigation.navigate('GameHard')
     };
 
-    const pressHandlerMadLvl = () => {
-        navigation.navigate('Mad')
+    const pressHandlerAchievements = () => {
+        navigation.navigate('Achievements')
     };
 
     return (
@@ -66,11 +66,18 @@ export default function Level({ navigation }) {
                             <Text style={styles.chooseGameTextInButt}>Middle</Text>
                         </TouchableOpacity>
                     </LinearGradient>
-                    {/*
-                    <TouchableOpacity style={styles.buttonsList} onPress={pressHandlerMadLvl}>
-                        <Text style={styles.chooseGameTextInButt}>Mad</Text>
-                    </TouchableOpacity>
-                    */}
+
+                    <LinearGradient
+                        // Background Linear Gradient
+                        start={{x: 1, y: 1}} end={{x: 0.8, y: 0.0}}
+                        colors={[ '#f9c5c5', '#fbceb9', '#f2dab5', '#e2e7bb', '#cdf3ce', '#bff6e0', '#b9f6f1', '#bdf5ff',
+                            '#caedfd', '#d6e6f5', '#dde0e9', '#dcdcdc']}
+                        style={styles.buttonsList}
+                    >
+                        <TouchableOpacity onPress={pressHandlerAchievements}>
+                            <Text style={styles.chooseGameTextInButt}>Achievements</Text>
+                        </TouchableOpacity>
+                    </LinearGradient>
                 </View>
             </LinearGradient>
         </View>

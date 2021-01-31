@@ -13,6 +13,7 @@ import GameEasy from "./screens/GameEasy";
 import GameMidle from "./screens/GameMidle"
 import GameHard from "./screens/GameHard"
 import Home from "./screens/Home";
+import Achievements from "./screens/Achievements";
 
 const Stack = createStackNavigator();
 
@@ -94,6 +95,10 @@ export default function App() {
                             }} />
 
                             <Stack.Screen name="GameHard" component={GameHard} options={{
+                                headerTransparent: true,
+                            }} />
+
+                            <Stack.Screen name="Achievements" component={Achievements} options={{
                                 headerTransparent: true,
                             }} />
                         </>
