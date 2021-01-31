@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Button, TouchableOpacity, Image } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Level({ navigation }) {
@@ -25,8 +25,8 @@ export default function Level({ navigation }) {
             <LinearGradient
                 // Background Linear Gradient
                 start={{x: 0, y: 0.75}} end={{ x: 1, y: 0.25}}
-                colors={[ '#f9c5c5', '#fbceb9', '#f2dab5', '#e2e7bb', '#cdf3ce', '#bff6e0', '#b9f6f1', '#bdf5ff',
-                    '#caedfd', '#d6e6f5', '#dde0e9', '#dcdcdc']}
+                colors={['#ffdaef', '#f8daf4', '#efdbf9', '#e6dcfd', '#dbddff', '#d3e1ff', '#cbe5ff', '#c6e8ff', '#c4eeff',
+                    '#c3f4ff', '#c5faff', '#c9fffc']}
                 style={styles.background}
             >
                 <View style={styles.buttonsContainer}>
@@ -79,6 +79,13 @@ export default function Level({ navigation }) {
                         </TouchableOpacity>
                     </LinearGradient>
                 </View>
+                <View>
+                    <TouchableOpacity onPress={pressHandlerMadLvl}>
+                        <View style={styles.cupContainer}>
+                        <Image style={{width: 30, height: 30}} source={require('../img/cup.png')}/>
+                        </View>
+                    </TouchableOpacity>
+                </View>
             </LinearGradient>
         </View>
     )
@@ -128,6 +135,16 @@ const styles = StyleSheet.create({
     chooseGameTextInButt: {
         fontSize: 18,
         fontWeight: '600',
-        color: '#FFFFFF'
+        color: '#FFFFFF',
+    },
+    cupContainer: {
+        width: 50,
+        height: 50,
+        borderRadius: 10,
+        backgroundColor: 'rgba(1,1,1,0.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20,
+
     }
 });

@@ -1,0 +1,69 @@
+import React from 'react'
+import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native'
+import {LinearGradient} from "expo-linear-gradient";
+
+export default function Mad() {
+    return (
+        <LinearGradient
+            // Background Linear Gradient
+            start={{x: 0, y: 0.75}} end={{ x: 1, y: 0.25}}
+            colors={['#ffdaef', '#f8daf4', '#efdbf9', '#e6dcfd', '#dbddff', '#d3e1ff', '#cbe5ff', '#c6e8ff', '#c4eeff',
+                '#c3f4ff', '#c5faff', '#c9fffc']}
+            style={styles.background}
+            >
+            <View style={styles.container}>
+                <View style={styles.tabList}>
+                    <Text style={styles.topUsersText}>Top Users</Text>
+                    <View style={styles.userContainer}>
+                        <Text style={styles.userText}>1. Oliver Sykes: 420</Text>
+                    </View>
+                </View>
+            </View>
+        </LinearGradient>
+    )
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flexWrap: 'wrap',
+        justifyContent: 'center'
+    },
+    background: {
+        width: '100%',
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    tabList: {
+        width: 300,
+        height: 470,
+        backgroundColor: 'rgba(250,250,250,0.5)',
+        borderRadius: 10,
+        shadowColor: '#000000',
+        shadowOffset: {width: 0, height: 0},
+        shadowOpacity: 0.2,
+        shadowRadius: 20,
+        elevation: 10,
+        alignItems: 'center'
+    },
+    topUsersText: {
+        paddingTop: 20,
+        fontSize: 24,
+        fontWeight: '300',
+        marginBottom: 20
+    },
+    userContainer: {
+        width: '85%',
+        height: 40,
+        backgroundColor: '#F2F2F2',
+        borderRadius: 10,
+        justifyContent: 'center',
+        paddingLeft: 15,
+        marginTop: 5,
+        marginBottom: 5
+    },
+    userText: {
+        fontSize: 15,
+        fontWeight: '600'
+    },
+});

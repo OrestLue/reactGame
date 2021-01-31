@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     title: {
 
@@ -12,15 +12,25 @@ export default StyleSheet.create({
         height: 48,
         marginVertical: 10,
         marginHorizontal: 30,
-        backgroundColor: 'white',
+        backgroundColor: 'rgba(255,255,255,0.5)',
     },
     button: {
-        backgroundColor: '#788eec',
+        backgroundColor: '#19181A',
         marginLeft: 30,
+        marginTop: 20,
+        height: 45,
+        width: '38%',
+        borderRadius: 10,
+        alignItems: "center",
+        justifyContent: 'center'
+    },
+    button2: {
+        backgroundColor: '#2F2E30',
         marginRight: 30,
         marginTop: 20,
-        height: 48,
-        borderRadius: 5,
+        height: 45,
+        width: '38%',
+        borderRadius: 10,
         alignItems: "center",
         justifyContent: 'center'
     },
@@ -45,5 +55,28 @@ export default StyleSheet.create({
     },
     errorMessage: {
         marginLeft: 30,
+    },
+
+    buttonCont: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    topText: {
+        marginLeft: 30,
+        marginTop: 50
+    },
+    textFlip: {
+        fontSize: 55,
+        fontWeight: '900',
+    },
+    textCard: {
+        fontSize: 40,
+        fontWeight: '200'
+    },
+    backgroundGradient: {
+        width: '100%',
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 })

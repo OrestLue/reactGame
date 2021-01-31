@@ -11,6 +11,7 @@ import emailConstraints from '../../validate/emailConstraints';
 import passwordConstraints from "../../validate/passwordConstraints";
 import confirmPasswordConstraints from "../../validate/confirmPasswordConstraints";
 import usernameConstraints from "../../validate/usernameConstraints";
+import {LinearGradient} from "expo-linear-gradient";
 
 export default function RegistrationScreen({navigation, setLoading}) {
     const [fullName, setFullName] = useState('')
@@ -155,10 +156,20 @@ export default function RegistrationScreen({navigation, setLoading}) {
 
     return (
         <View style={styles.container}>
+            <LinearGradient
+                // Background Linear Gradient
+                start={{x: 0, y: 0.75}} end={{ x: 1, y: 0.25}}
+                colors={['#ffdaef', '#f8daf4', '#efdbf9', '#e6dcfd', '#dbddff', '#d3e1ff', '#cbe5ff', '#c6e8ff', '#c4eeff',
+                    '#c3f4ff', '#c5faff', '#c9fffc']}
+                style={styles.backgroundGradient}
+            >
             <KeyboardAwareScrollView
                 style={{flex: 1, width: '100%'}}
                 keyboardShouldPersistTaps="always">
-
+                <View style={styles.topText}>
+                    <Text style={styles.textFlip}>Flip</Text>
+                    <Text style={styles.textCard}>Card</Text>
+                </View>
                 <TextInput
                     style={styles.input}
                     error={!fullNameIsValid}
@@ -261,11 +272,13 @@ export default function RegistrationScreen({navigation, setLoading}) {
                         {confirmPasswordError}
                     </HelperText>
                 }
+                <View style={{alignItems: "center", justifyContent: 'center'}}>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => onRegisterPress()}>
                     <Text style={styles.buttonTitle}>Create account</Text>
                 </TouchableOpacity>
+                </View>
 
                 <View style={styles.footerView}>
                     <Text style={styles.footerText}>Already got an account? <Text onPress={onFooterLinkPress}
@@ -273,6 +286,7 @@ export default function RegistrationScreen({navigation, setLoading}) {
                         in</Text></Text>
                 </View>
             </KeyboardAwareScrollView>
+            </LinearGradient>
         </View>
     )
 }
